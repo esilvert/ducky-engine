@@ -1,4 +1,4 @@
 install:
-	cp main.rb ../mygame/app/main.rb
-	cp repl.rb ../mygame/app/repl.rb
-	cp makefile_root ../Makefile
+	cp install/main.rb ../mygame/app/main.rb
+	cp install/repl.rb ../mygame/app/repl.rb
+	cp install/Makefile ../Makefile
