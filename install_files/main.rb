@@ -1,9 +1,7 @@
 require 'ducky/ducky.rb'
 
 def tick(args)
-  $ducky ||= Ducky.configure do
-    game_class Game
-  end
+  $ducky ||= Ducky.configure
 
   $ducky.tick(args)
 end

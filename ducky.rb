@@ -10,9 +10,10 @@ require 'ducky/lib/fsm.rb'
 
 require 'ducky/lib/interfaces/uses_mouse.rb'
 
-require 'ducky/lib/root.rb'
+require 'ducky/lib/engines/initializer.rb'
 require 'ducky/lib/engines/core.rb'
 require 'ducky/lib/engines/physics.rb'
+require 'ducky/lib/root.rb'
 
 require 'ducky/lib/nodes/node_2d.rb'
 require 'ducky/lib/nodes/label.rb'
@@ -38,10 +39,8 @@ module Ducky
   SCREEN_HEIGHT = 720
   DELTA_TIME = 1.0 / 60.0
 
-  def self.configure(&block)
-    Root.new.tap do |root|
-      root.custom_init(&block)
-    end
+  def self.configure
+    Root.new
   end
 
   def self.reload
