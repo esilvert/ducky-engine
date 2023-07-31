@@ -1,5 +1,4 @@
-# Internal Dependencies
-require 'app/ducky/ducky'
+require 'ducky/ducky'
 
 def on_game_start
   $ducky.game_class = Game
@@ -13,10 +12,10 @@ def require_game_files
   # require 'app/nodes/custom_nodefrb'
 
   # Scenes
-  require 'app/scenes/main_menu'
+  require 'ducky/scenes/main_menu'
 
   # Game
-  require 'app/game'
+  require 'ducky/game'
 end
 
 def tick(args)

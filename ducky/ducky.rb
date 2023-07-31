@@ -1,31 +1,31 @@
 # Ducky
 
-require 'app/ducky/support'
-require 'app/ducky/vector2'
-require 'app/ducky/color'
-require 'app/ducky/aabb'
-require 'app/ducky/input'
-require 'app/ducky/node'
-require 'app/ducky/fsm'
+require 'ducky/support.rb'
+require 'ducky/vector2.rb'
+require 'ducky/color.rb'
+require 'ducky/aabb.rb'
+require 'ducky/input.rb'
+require 'ducky/node.rb'
+require 'ducky/fsm.rb'
 
-require 'app/ducky/interfaces/uses_mouse'
+require 'ducky/interfaces/uses_mouse.rb'
 
-require 'app/ducky/root'
-require 'app/ducky/engines/core'
-require 'app/ducky/engines/physics'
+require 'ducky/root.rb'
+require 'ducky/engines/core.rb'
+require 'ducky/engines/physics.rb'
 
-require 'app/ducky/nodes/node_2d'
-require 'app/ducky/nodes/label'
-require 'app/ducky/nodes/sprite'
-require 'app/ducky/nodes/button'
-require 'app/ducky/nodes/physics_2d'
-require 'app/ducky/nodes/static_body'
-require 'app/ducky/nodes/kinematic_body'
-require 'app/ducky/nodes/shape'
-require 'app/ducky/nodes/rectangle_shape'
+require 'ducky/nodes/node_2d.rb'
+require 'ducky/nodes/label.rb'
+require 'ducky/nodes/sprite.rb'
+require 'ducky/nodes/button.rb'
+require 'ducky/nodes/physics_2d.rb'
+require 'ducky/nodes/static_body.rb'
+require 'ducky/nodes/kinematic_body.rb'
+require 'ducky/nodes/shape.rb'
+require 'ducky/nodes/rectangle_shape.rb'
 
-require 'app/ducky/game'
-require 'app/ducky/scene'
+require 'ducky/game.rb'
+require 'ducky/scene.rb'
 
 class Object
   def log(msg)
