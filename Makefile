@@ -1,8 +1,12 @@
-install:
-	cp install_files/main.rb ../mygame/app/main.rb
-	cp install_files/repl.rb ../mygame/app/repl.rb
-	cp install_files/lib.rb ../mygame/app/lib.rb
-	cp install_files/models.rb ../mygame/app/models.rb
-	cp install_files/scenes.rb ../mygame/app/scenes.rb
-	cp install_files/Makefile ../Makefile
-	mkdir ../mygame/app/{models,scenes}
+install: directories
+	cp install_files/main.rb ../mygame/app/
+	cp install_files/repl.rb ../mygame/app/
+	cp install_files/lib.rb ../mygame/app/
+	cp install_files/models.rb ../mygame/app/
+	cp install_files/scenes.rb ../mygame/app/
+	cp install_files/main_menu.rb ../mygame/app/scenes/
+	cp install_files/Makefile ../
+
+directories:
+	[ -d ../mygame/app/models ] || mkdir ../mygame/app/models
+	[ -d ../mygame/app/scenes ] || mkdir ../mygame/app/scenes
