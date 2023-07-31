@@ -38,8 +38,10 @@ module Ducky
   SCREEN_HEIGHT = 720
   DELTA_TIME = 1.0 / 60.0
 
-  def self.configure
-    Root.new
+  def self.configure(&block)
+    Root.new.tap do |root|
+      root.instance_eval(&block)
+    end
   end
 
   def self.reload
