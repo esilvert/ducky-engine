@@ -6,8 +6,9 @@ module Ducky
     end
 
     def tick(args)
-      require_game_files and return if should_require_game_files?
-      start_game(args) and return if should_start_game?
+      run_custom_init and return unless @custom_initialized
+      require_game_files and return unless @required_game_files
+      start_game(args) and return unless @initialized
 
       @core.system_update(args)
       @core.system_draw(args)
@@ -15,29 +16,37 @@ module Ducky
 
     private
 
-    def should_require_game_files?
-      !@required_game_files
-    end
-
     def require_game_files
-      log 'Requiring files'
+      log '[Root] Requiring files'
 
-      @require_game_files_block.call
+      require 'app/lib.rb'
+      require 'app/models.rb'
+      require 'app/scenes.rb'
+
+      require 'ducky/game'
+
       @required_game_files = true
     end
 
-    def should_start_game?
-      !@initialized
-    end
-
     def start_game(args)
-      log 'Starting game'
+      log '[Root] Starting game'
 
       raise 'Missing game class, please use Ducky#game_class= in game_start callback' if @game_class.nil?
 
       @core = Engine::Core.new(args, game: @game_class)
 
       @initialized = true
+    end
+
+    def custom_init(&block)
+      @custom_init = block
+    end
+
+    def run_custom_init
+      log '[Root] Running custom init'
+
+      instance_eval(&@custom_init) unless @custom_init.nil?
+      @custom_initialized = true
     end
 
     def game_class(constant)

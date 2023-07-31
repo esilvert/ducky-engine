@@ -40,7 +40,7 @@ module Ducky
 
   def self.configure(&block)
     Root.new.tap do |root|
-      root.instance_eval(&block)
+      root.custom_init(&block)
     end
   end
 
