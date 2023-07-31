@@ -1,4 +1,4 @@
-require 'ducky/ducky'
+require 'ducky/ducky.rb'
 
 def on_game_start
   $ducky.game_class = Game
