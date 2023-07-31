@@ -5,6 +5,7 @@ install: directories
 	cp install_files/models.rb ../mygame/app/
 	cp install_files/scenes.rb ../mygame/app/
 	cp install_files/main_menu.rb ../mygame/app/scenes/
+	cp install_files/game.rb ../mygame/app/
 	cp install_files/Makefile ../
 
 directories:

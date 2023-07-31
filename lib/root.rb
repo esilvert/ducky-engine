@@ -6,8 +6,8 @@ module Ducky
     end
 
     def tick(args)
-      run_custom_init and return unless @custom_initialized
       require_game_files and return unless @required_game_files
+      run_custom_init and return unless @custom_initialized
       start_game(args) and return unless @initialized
 
       @core.system_update(args)
@@ -23,7 +23,7 @@ module Ducky
       require 'app/models.rb'
       require 'app/scenes.rb'
 
-      require 'ducky/game'
+      require 'app/game.rb'
 
       @required_game_files = true
     end
