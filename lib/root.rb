@@ -18,7 +18,7 @@ module Ducky
     private
 
     def start_game(args)
-      log '[Root] Starting game'
+      log 'Starting game'
 
       @core = Engine::Core.new(args, game: ::Game)
     end

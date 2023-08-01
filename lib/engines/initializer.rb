@@ -23,7 +23,7 @@ module Ducky
       private
 
       def require_game_files
-        log '[Root] Requiring files'
+        log 'Requiring files'
 
         require 'app/lib.rb'
         require 'app/models.rb'
@@ -35,7 +35,7 @@ module Ducky
       end
 
       def run_custom_init
-        log '[Root] Running custom init'
+        log 'Running custom init'
 
         instance_eval(&@custom_init) unless @custom_init.nil?
         @initialization_complete = true

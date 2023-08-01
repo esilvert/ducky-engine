@@ -30,12 +30,16 @@ require 'ducky/lib/scene.rb'
 
 class Object
   def log(msg)
+    @@indent ||= 0
+
     if block_given?
-      p "[#{self.class.name}] <#{__FILE__}:#{__LINE__}> \n\t#{msg}"
+      puts "#{"\t" * @@indent} [#{self.class.name}]  #{msg}"
+      @@indent += 1
       yield
-      p "-- ENDED (#{msg})"
+      @@indent -= 1
+      puts "#{"\t" * @@indent} [#{self.class.name}] -- ENDED (#{msg})"
     else
-      p "[#{self.class.name}] <#{__FILE__}:#{__LINE__}> \n\t#{msg}"
+      puts "#{"\t" * @@indent} [#{self.class.name}] #{msg}"
     end
   end
 end
