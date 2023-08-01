@@ -9,3 +9,8 @@ Style/FrozenStringLiteralComment:
 
 Style/RedundantFileExtensionInRequire:
   Enabled: false
+
+Style/GlobalVars:
+  AllowedVariables:
+    - $gtk
+    - $ducky

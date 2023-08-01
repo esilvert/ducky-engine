@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MainMenu < Ducky::Scene
   def initialize
     super

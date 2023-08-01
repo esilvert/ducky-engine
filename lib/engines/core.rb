@@ -8,13 +8,17 @@ module Ducky
       attr_reader :engines, :scenes, :current_scene
 
       def initialize(_args, game:)
-        @engines = {
-          physics: Physics.instance
-        }
-        @scenes = []
-        @game = game.new
+        log 'Instantiating engines' do
+          @engines = {
+            physics: Physics.instance
+          }
+        end
 
-        p '[Ducky] Core engine has been instantiated'
+        @scenes = []
+
+        log('Instantiating game class') { @game = game.new }
+
+        log '[Ducky] Core engine has been instantiated'
       end
 
       def tick(args)

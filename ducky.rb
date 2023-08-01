@@ -30,7 +30,13 @@ require 'ducky/lib/scene.rb'
 
 class Object
   def log(msg)
-    p "[#{self.class.name}] #{msg}"
+    if block_given?
+      p "[#{self.class.name}] <#{__FILE__}:#{__LINE__}> \n\t#{msg}"
+      yield
+      p "-- ENDED (#{msg})"
+    else
+      p "[#{self.class.name}] <#{__FILE__}:#{__LINE__}> \n\t#{msg}"
+    end
   end
 end
 
