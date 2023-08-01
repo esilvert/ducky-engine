@@ -14,3 +14,6 @@ Style/GlobalVars:
   AllowedVariables:
     - $gtk
     - $ducky
+
+Metrics/MethodLength:
+  Max: 20

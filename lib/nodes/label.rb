@@ -18,16 +18,16 @@ module Ducky
     attr_reader :text
     attr_accessor(*%i[size align font vertical_align color])
 
+    # rubocop:disable Metrics/ParameterLists
     def initialize(
-          position: Vector2.zero,
-          text:,
-          name: "Label##{hash}",
-          size: DEFAULT_FONT_SIZE,
-          align: TextAlign::CENTER,
-          vertical_align: TextVerticalAlign::CENTER,
-          font: DEFAULT_FONT,
-          color: Color.duck_blue
-        )
+      text:, position: Vector2.zero,
+      name: "Label##{hash}",
+      size: DEFAULT_FONT_SIZE,
+      align: TextAlign::CENTER,
+      vertical_align: TextVerticalAlign::CENTER,
+      font: DEFAULT_FONT,
+      color: Color.duck_blue
+    )
       super(position: position, name: name)
 
       @text = text
@@ -38,6 +38,7 @@ module Ducky
       @color = color
       @base_text = text
     end
+    # rubocop:enable Metrics/ParameterLists
 
     def restore_text
       self.text = @base_text
@@ -46,9 +47,7 @@ module Ducky
     def text=(value)
       @text = value
 
-      if @fit_in
-        fit_text_into(@fit_in.x, @fit_in.y, allow_growth: @fit_allow_growth)
-      end
+      fit_text_into(@fit_in.x, @fit_in.y, allow_growth: @fit_allow_growth) if @fit_in
     end
 
     def text_size
@@ -57,6 +56,7 @@ module Ducky
       Vector2.new(width, height)
     end
 
+    # rubocop:disable Metrics/AbcSize
     def fit_text_into(width, height, allow_growth: false)
       @fit_in = Vector2.new(width, height)
       @fit_allow_growth = allow_growth
@@ -68,8 +68,9 @@ module Ducky
               end
 
       @local_position.x += width / 2
-      @local_position.y += height / 2 + text_size.y / 2
+      @local_position.y += (height / 2) + (text_size.y / 2)
     end
+    # rubocop:enable Metrics/AbcSize
 
     def to_dr
       {

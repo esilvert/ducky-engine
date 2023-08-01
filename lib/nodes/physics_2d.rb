@@ -24,7 +24,7 @@ module Ducky
         return false
       end
 
-      return @shape.collides_with?(body.shape)
+      @shape.collides_with?(body.shape)
     end
 
     def draw(_args); end

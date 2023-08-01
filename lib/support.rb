@@ -16,7 +16,7 @@ module Ducky
 
   module MathSupport
     def lerp(from, to, progress)
-      from + (to - from) * progress.clamp(0, 1)
+      from + ((to - from) * progress.clamp(0, 1))
     end
 
     Object.include(self)

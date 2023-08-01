@@ -5,26 +5,27 @@ module Ducky
     COLOR_ATTRIBUTE_MIN = 0
     COLOR_ATTRIBUTE_MAX = 255
 
-
+    # rubocop:disable Naming/MethodParameterName
     def initialize(r, g, b, a = COLOR_ATTRIBUTE_MAX)
       @r = r
       @g = g
       @b = b
       @a = a
     end
+    # rubocop:enable Naming/MethodParameterName
 
-    def *(scalar)
-      new_r *= scalar
-      new_g *= scalar
-      new_b *= scalar
+    def *(other)
+      new_r *= other
+      new_g *= other
+      new_b *= other
 
       Color.new(new_r, new_g, new_b, @a)
     end
 
-    def +(color)
-      new_r = (@r + color.r).clamp(COLOR_ATTRIBUTE_MIN, COLOR_ATTRIBUTE_MAX)
-      new_g = (@g + color.g).clamp(COLOR_ATTRIBUTE_MIN, COLOR_ATTRIBUTE_MAX)
-      new_b = (@b + color.b).clamp(COLOR_ATTRIBUTE_MIN, COLOR_ATTRIBUTE_MAX)
+    def +(other)
+      new_r = @r + other.r
+      new_g = @g + other.g
+      new_b = @b + other.b
 
       Color.new(new_r, new_g, new_b, @a)
     end
@@ -70,7 +71,7 @@ module Ducky
         new(128, 0, 0)
       end
 
-      def gree
+      def green
         new(0, 128, 0)
       end
 

@@ -2,19 +2,21 @@ module Ducky
   class Vector2
     attr_accessor :x, :y
 
+    # rubocop:disable Naming/MethodParameterName
     def initialize(x, y)
-      if x.is_a?(String)
-        @x = x.vw
-      else
-        @x = x
-      end
+      @x = if x.is_a?(String)
+             x.vw
+           else
+             x
+           end
 
-      if y.is_a?(String)
-        @y = y.vh
-      else
-        @y = y
-      end
+      @y = if y.is_a?(String)
+             y.vh
+           else
+             y
+           end
     end
+    # rubocop:enable Naming/MethodParameterName
 
     def +(other)
       Vector2.new(@x + other.x, @y + other.y)
@@ -29,7 +31,7 @@ module Ducky
     end
 
     def magnitude
-      Math.sqrt(@x.to_f ** 2 + @y.to_f ** 2)
+      Math.sqrt((@x.to_f**2) + (@y.to_f**2))
     end
 
     def normalized
@@ -47,7 +49,7 @@ module Ducky
     end
 
     def serialize
-      {x: @x, y: @y}
+      { x: @x, y: @y }
     end
 
     def inspect

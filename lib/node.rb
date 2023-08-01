@@ -25,9 +25,7 @@ module Ducky
     end
 
     def serialize
-      res = {}
-
-      return name
+      instance_variables.to_h { |var| [var, instance_variable_get(var)] }
     end
 
     def inspect
@@ -55,10 +53,11 @@ module Ducky
       node
     end
 
-    def system_update(args) # Called generically by the system
+    # Called generically by the system
+    def system_update(args)
       return unless processing
 
-      ducky_update(args) # Uses internally by ducky nodes
+      ducky_update(args) # Used internally by ducky nodes
       update(args) # Can be overriden by end user
       active_children.each { |child| child.system_update(args) }
     end
@@ -68,14 +67,13 @@ module Ducky
 
     def system_draw(args)
       draw(args)
+
       active_children.each do |node|
         node.system_draw(args)
       end
     end
 
-    def draw(_args)
-      # raise NotImplementedError, "You must define a #draw method for node #{name}"
-    end
+    def draw(args); end
 
     def disabled?
       @disabled
@@ -103,10 +101,11 @@ module Ducky
     end
 
     def delta_time
-      time_scale
+      time_scale * DELTA_TIME
     end
 
     private
+
     def active_children
       @children.reject(&:disabled?)
     end

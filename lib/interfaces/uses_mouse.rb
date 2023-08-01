@@ -5,7 +5,7 @@ module Ducky
     end
 
     def hovered?
-      mouse.inside_rect?( AABB.from_2v2(position, size) )
+      mouse.inside_rect?(AABB.from_2v2(position, size))
     end
 
     def pressed?
@@ -13,13 +13,13 @@ module Ducky
     end
 
     def clicked?
-      mouse.click&.inside_rect?( AABB.from_2v2(position, size) ) || false
+      mouse.click&.inside_rect?(AABB.from_2v2(position, size)) || false
     end
 
     def included(base)
-      unless base.respond_to?(:position) && base.respond_to?(:size)
-        raise NotImplementedError, "Ducky::UsesMouse requires #position and #size methods"
-      end
+      return if base.respond_to?(:position) && base.respond_to?(:size)
+
+      raise NotImplementedError, 'Ducky::UsesMouse requires #position and #size methods'
     end
 
     private

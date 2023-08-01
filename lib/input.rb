@@ -4,7 +4,7 @@ module Ducky
 
     module ClassMethods
       def instance
-        @instance ||= self.new
+        @instance ||= new
       end
 
       def register_action(action_id, *inputs)
@@ -101,10 +101,7 @@ module Ducky
     def assert_valid_inputs!(inputs)
       invalid_inputs = inputs.reject { |input| valid_keys.include?(input) }
 
-      unless invalid_inputs.empty? || true # TODO: Record somewhere all posible inputs
-        p valid_keys
-        raise UnknownKey, "Ducky does not know the inputs: #{invalid_inputs}"
-      end
+      raise UnknownKey, "Ducky does not know the inputs: #{invalid_inputs}" unless invalid_inputs.empty?
     end
 
     def valid_keys
