@@ -15,3 +15,7 @@ clear_logs:
 new_scene:
 	@echo "New scene name: (ex: Tutorial, with capital)"
 	@read NAME && sed "s/SCENE_NAME/$$NAME/g" $(template_dir)/scene.rb > `echo $(destination_dir)/scenes/$$NAME.rb | tr '[:upper:]' '[:lower:]'`
+
+new_node:
+	@echo "New node name: (ex: Player, with capital)"
+	@read NAME && sed "s/NODE_NAME/$$NAME/g" $(template_dir)/node.rb > `echo $(destination_dir)/nodes/$$NAME.rb | tr '[:upper:]' '[:lower:]'`
