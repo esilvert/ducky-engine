@@ -45,8 +45,8 @@ class Object
 end
 
 module Ducky
-  SCREEN_WIDTH  = 1280
-  SCREEN_HEIGHT = 720
+  SCREEN_WIDTH  = 1280 # 540 for portrait
+  SCREEN_HEIGHT = 720 # 960 for portrait
   DELTA_TIME = 1.0 / 60.0
 
   def self.configure
