@@ -10,6 +10,7 @@ module Ducky
       STATIC_BODY = :primitive
       KINEMATIC_BODY = :primitive
       BACKGROUND_COLOR = :background_color
+      GRID_CONTAINER = :primitive
     end
 
     attr_reader :parent, :children, :dead
@@ -26,10 +27,6 @@ module Ducky
 
     def serialize
       instance_variables.to_h { |var| [var, instance_variable_get(var)] }
-    end
-
-    def inspect
-      serialize.to_s
     end
 
     def to_s

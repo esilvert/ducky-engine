@@ -24,6 +24,7 @@ require 'app/ducky/lib/nodes/static_body.rb'
 require 'app/ducky/lib/nodes/kinematic_body.rb'
 require 'app/ducky/lib/nodes/shape.rb'
 require 'app/ducky/lib/nodes/rectangle_shape.rb'
+require 'app/ducky/lib/nodes/grid_container.rb'
 
 require 'app/ducky/lib/game.rb'
 require 'app/ducky/lib/scene.rb'

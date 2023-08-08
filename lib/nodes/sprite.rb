@@ -30,9 +30,7 @@ module Ducky
 
     # rubocop:disable Metrics/ParameterLists
     def initialize(
-      position:,
-      width:,
-      height:,
+      width:, height:, position: Vector2.zero,
       name: "Sprite##{hash}",
       asset: 'square/blue.png',
       angle: 0,
