@@ -1,5 +1,7 @@
 module Ducky
   class GridContainer < Node2D
+    dr_type :primitive
+
     DEFAULT_COLUMN_COUNT = 2
     DEFAULT_CELL_GAP = Vector2.one * 5
 

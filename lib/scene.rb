@@ -59,38 +59,16 @@ module Ducky
       false
     end
 
-    def register_node(node)
-      @nodes << node
+    def register_node(node, **options)
+      if options[:static]
+        @static_nodes[node.dr_type] << node
+      else
+        @nodes << node
+      end
 
       yield node if block_given?
 
       node
-    end
-
-    # Define all register_* node methods
-    Node::Type.constants.each do |const|
-      type_value = Node::Type.const_get(const)
-      normalized_type_name = const.to_s.downcase
-
-      log "Defining method register_#{normalized_type_name}"
-      normalized_type = type_value.to_s.downcase
-
-      define_method("register_#{normalized_type_name}") do |node, **options|
-        # unless node.is_a?(Node)
-        #   raise Node::NotANode,
-        #         "Ducky::Scene##{__method__} must receive a Ducky::Node, received <#{node}>"
-        # end
-
-        if options[:static]
-          @static_nodes[normalized_type] << node
-        else
-          @nodes << node
-        end
-
-        yield node if block_given?
-
-        node
-      end
     end
 
     def print_tree

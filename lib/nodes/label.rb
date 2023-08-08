@@ -1,5 +1,7 @@
 module Ducky
   class Label < Node2D
+    dr_type :label
+
     DEFAULT_FONT_SIZE = 2
     DEFAULT_FONT = 'fonts/manaspc.ttf'.freeze
 

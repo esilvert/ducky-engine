@@ -11,22 +11,22 @@ class MainMenu < Ducky::Scene
       ),
       static: true
     )
-    @play_button = register_button(play_button)
+    @play_button = register_node(play_button)
                    .on_clicked do
       @next_scene = MainMenu
       @complete = true
     end
-    @tutorial_button = register_button(tutorial_button)
+    @tutorial_button = register_node(tutorial_button)
                        .on_clicked do
       @next_scene = MainMenu
       @complete = true
     end
-    @exit_button = register_button(exit_button)
+    @exit_button = register_node(exit_button)
 
     @next_scene = MainMenu
     @complete = false
 
-    # register_panel(Panel.new(size: Ducky::Vector2.new(10000,800)), static: true)
+    # register_node(Panel.new(size: Ducky::Vector2.new(10000,800)), static: true)
   end
 
   def complete?

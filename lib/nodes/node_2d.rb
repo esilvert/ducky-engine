@@ -1,5 +1,7 @@
 module Ducky
   class Node2D < Node
+    dr_type :primitive
+
     def initialize(position:, name: "Node2D##{hash}")
       super(name)
 

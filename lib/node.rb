@@ -2,15 +2,10 @@ module Ducky
   class Node
     class NotANode < StandardError; end
 
-    module Type
-      LABEL = :label
-      SPRITE = :sprite
-      PANEL = :sprite
-      BUTTON = :sprite
-      STATIC_BODY = :primitive
-      KINEMATIC_BODY = :primitive
-      BACKGROUND_COLOR = :background_color
-      GRID_CONTAINER = :primitive
+    class << self
+      def dr_type(type)
+        define_method(:dr_type) { type }
+      end
     end
 
     attr_reader :parent, :children, :dead

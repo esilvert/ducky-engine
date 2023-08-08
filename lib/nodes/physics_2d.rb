@@ -1,5 +1,7 @@
 module Ducky
   class Physics2D < Node2D
+    dr_type :primitive
+
     attr_reader :collision_layer, :shape
 
     def initialize(position:, collision_layer:, name: "Physics2D##{hash}")

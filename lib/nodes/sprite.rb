@@ -1,5 +1,7 @@
 module Ducky
   class Sprite < Node2D
+    dr_type :sprite
+
     SPRITE_DIR = 'sprites/'.freeze
 
     attr_accessor(*%i[
