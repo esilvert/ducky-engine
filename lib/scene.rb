@@ -1,30 +1,38 @@
 module Ducky
   class Scene
-    attr_reader :nodes
-    attr_reader :next_scene
+    attr_reader :nodes, :next_scene, :background_color
 
     def self.clear
-      $gtk.args.outputs.static_solids.clear
-      $gtk.args.outputs.static_sprites.clear
-      $gtk.args.outputs.static_primitives.clear
-      $gtk.args.outputs.static_labels.clear
-      $gtk.args.outputs.static_lines.clear
-      $gtk.args.outputs.static_borders.clear
-      $gtk.args.outputs.static_debug.clear
+      outputs = $gtk.args.outputs
+
+      [
+        outputs.static_solids,
+        outputs.static_sprites,
+        outputs.static_primitives,
+        outputs.static_labels,
+        outputs.static_lines,
+        outputs.static_borders,
+        outputs.static_debug
+      ].each(&:clear)
     end
 
     def initialize
+      reset
+    end
+
+    def reset
       @nodes = []
       @static_nodes = Hash.new { |hash, new_key| hash[new_key] = [] }
       @background_color = Color.white
     end
 
     def enter_tree
-      output_static_nodes
+      draw_static_nodes
     end
 
     def system_update(args)
       update(args)
+
       active_nodes.each { |node| node.system_update(args) }
       purge_nodes!
     end
@@ -33,13 +41,14 @@ module Ducky
 
     def system_draw(args)
       draw(args)
+
       active_nodes.each do |node|
         node.system_draw(args)
       end
     end
 
     def draw(args)
-      args.outputs.background_color = @background_color.to_dr
+      args.outputs.background_color = background_color.to_dr
     end
 
     def complete?
@@ -86,14 +95,13 @@ module Ducky
 
     protected
 
-    def output_static_nodes
+    # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity
+    def draw_static_nodes
       outputs = $gtk.args.outputs
 
-      @static_nodes.each do |type, nodes|
-        next if nodes.empty?
+      @static_nodes.reject(&:empty?).each do |type, nodes|
         nodes_dr = nodes.map(&:to_dr)
 
-        # solids, sprite, primitive, label, line, border, debug
         case type.to_sym
         when :solid     then outputs.static_solids << nodes_dr
         when :sprite    then outputs.static_sprites << nodes_dr
@@ -106,12 +114,14 @@ module Ducky
         end
       end
     end
+    # rubocop:enable Metrics/AbcSize, Metrics/CyclomaticComplexity
 
     def exit_tree
       Ducky.clear_all
     end
 
     private
+
     def active_nodes
       @nodes.reject(&:disabled?)
     end

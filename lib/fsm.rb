@@ -22,17 +22,14 @@ module Ducky
 
         state_method = "on_state_#{current_state.to_s.downcase}"
 
-        if @root.respond_to?(state_method)
-          @root.send(state_method)
-        end
+        @root.send(state_method) if @root.respond_to?(state_method)
       end
 
-      state_method = "state_#{current_state.to_s.downcase}"
-      if @root.respond_to?(state_method)
-        @root.send(state_method)
-      else
+      unless @root.respond_to?(current_state_method)
         raise NameError, "FSM is in state #{@current_state} but there is no ##{state_method} defined in root #{@root}"
       end
+
+      @root.send(state_method)
 
       @state_duration += @root.delta_time
     end
@@ -41,13 +38,10 @@ module Ducky
       raise NotImplementedError, 'Ducky::FSM#states must be override'
     end
 
-    def states=(val)
-      raise ArgumentError, "unknown state #{val}, possible states are #{states}" unless states.include?(val)
+    private
 
-      @states = val
-      @previous_state = nil
-      @current_state = @states.first
-      @next_state = nil
+    def current_state_method
+      "state_#{current_state.to_s.downcase}"
     end
   end
 end

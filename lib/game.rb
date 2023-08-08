@@ -3,8 +3,7 @@ module Ducky
     def initialize
       @scenes = {}
 
-      log 'Configuring scenes'
-      configuration
+      log('Configuring scenes') { configuration }
 
       raise 'You must add at least one scene during the game configuration' if @scenes.empty?
 
@@ -12,7 +11,7 @@ module Ducky
     end
 
     def configuration
-      raise NotImplementedError, 'You must rewrite Game#configuration'
+      raise NotImplementedError, 'You must override Game#configuration and call add_scene at least once.'
     end
 
     def add_scene(id, scene_class)

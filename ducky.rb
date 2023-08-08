@@ -1,41 +1,52 @@
 # Ducky
 
-require 'ducky/lib/support.rb'
-require 'ducky/lib/vector2.rb'
-require 'ducky/lib/color.rb'
-require 'ducky/lib/aabb.rb'
-require 'ducky/lib/input.rb'
-require 'ducky/lib/node.rb'
-require 'ducky/lib/fsm.rb'
+require 'app/ducky/lib/support.rb'
+require 'app/ducky/lib/vector2.rb'
+require 'app/ducky/lib/color.rb'
+require 'app/ducky/lib/aabb.rb'
+require 'app/ducky/lib/input.rb'
+require 'app/ducky/lib/node.rb'
+require 'app/ducky/lib/fsm.rb'
 
-require 'ducky/lib/interfaces/uses_mouse.rb'
+require 'app/ducky/lib/interfaces/uses_mouse.rb'
 
-require 'ducky/lib/root.rb'
-require 'ducky/lib/engines/core.rb'
-require 'ducky/lib/engines/physics.rb'
+require 'app/ducky/lib/engines/initializer.rb'
+require 'app/ducky/lib/engines/core.rb'
+require 'app/ducky/lib/engines/physics.rb'
+require 'app/ducky/lib/root.rb'
 
-require 'ducky/lib/nodes/node_2d.rb'
-require 'ducky/lib/nodes/label.rb'
-require 'ducky/lib/nodes/sprite.rb'
-require 'ducky/lib/nodes/button.rb'
-require 'ducky/lib/nodes/physics_2d.rb'
-require 'ducky/lib/nodes/static_body.rb'
-require 'ducky/lib/nodes/kinematic_body.rb'
-require 'ducky/lib/nodes/shape.rb'
-require 'ducky/lib/nodes/rectangle_shape.rb'
+require 'app/ducky/lib/nodes/node_2d.rb'
+require 'app/ducky/lib/nodes/label.rb'
+require 'app/ducky/lib/nodes/sprite.rb'
+require 'app/ducky/lib/nodes/button.rb'
+require 'app/ducky/lib/nodes/physics_2d.rb'
+require 'app/ducky/lib/nodes/static_body.rb'
+require 'app/ducky/lib/nodes/kinematic_body.rb'
+require 'app/ducky/lib/nodes/shape.rb'
+require 'app/ducky/lib/nodes/rectangle_shape.rb'
 
-require 'ducky/lib/game.rb'
-require 'ducky/lib/scene.rb'
+require 'app/ducky/lib/game.rb'
+require 'app/ducky/lib/scene.rb'
 
 class Object
   def log(msg)
-    p "[#{self.class.name}] #{msg}"
+    @@indent ||= 0
+
+    if block_given?
+      puts "#{"\t" * @@indent} [#{self.class.name}]  #{msg}"
+      @@indent += 1
+      yield
+      @@indent -= 1
+      puts "#{"\t" * @@indent} [#{self.class.name}] -- ENDED (#{msg})"
+    else
+      puts "#{"\t" * @@indent} [#{self.class.name}] #{msg}"
+    end
   end
 end
 
 module Ducky
-  SCREEN_WIDTH  = 1280
-  SCREEN_HEIGHT = 720
+  SCREEN_WIDTH  = 1280 # 540 for portrait
+  SCREEN_HEIGHT = 720 # 960 for portrait
   DELTA_TIME = 1.0 / 60.0
 
   def self.configure

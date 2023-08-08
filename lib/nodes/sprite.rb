@@ -3,21 +3,21 @@ module Ducky
     SPRITE_DIR = 'sprites/'.freeze
 
     attr_accessor(*%i[
-                   width
-                   height
-                   asset
-                   angle
-                   modulate
-                   source_x
-                   source_y
-                   source_w
-                   source_h
-                   flip_vertically
-                   flip_horizontally
-                   angle_anchor_x
-                   angle_anchor_y
-                   blend_mode
-                 ])
+                    width
+                    height
+                    asset
+                    angle
+                    modulate
+                    source_x
+                    source_y
+                    source_w
+                    source_h
+                    flip_vertically
+                    flip_horizontally
+                    angle_anchor_x
+                    angle_anchor_y
+                    blend_mode
+                  ])
 
     # 0 (no blending), 1 (alpha blending), 2 (additive blending), 3 (modulo blending), 4 (multiply blending).
     module Blending
@@ -28,6 +28,7 @@ module Ducky
       MULTIPLY = 4
     end
 
+    # rubocop:disable Metrics/ParameterLists
     def initialize(
       position:,
       width:,
@@ -63,7 +64,9 @@ module Ducky
       @angle_anchor_y = angle_anchor_y
       @blend_mode = blend_mode
     end
+    # rubocop:enable Metrics/ParameterLists
 
+    # rubocop:disable Metrics/MethodLength
     def to_dr
       {
         x: position.x,
@@ -87,6 +90,7 @@ module Ducky
         blendmode_enum: @blend_mode
       }
     end
+    # rubocop:enable Metrics/MethodLength
 
     def draw(args)
       args.outputs.sprites << to_dr

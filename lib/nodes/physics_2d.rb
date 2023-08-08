@@ -20,11 +20,11 @@ module Ducky
 
     def collides_with?(body)
       if @shape.nil? || body.shape.nil?
-        log "WARNING: node #{self.name} is using phyiscs but has no shape"
+        log "WARNING: node #{name} is using phyiscs but has no shape"
         return false
       end
 
-      return @shape.collides_with?(body.shape)
+      @shape.collides_with?(body.shape)
     end
 
     def draw(_args); end

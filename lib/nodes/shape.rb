@@ -1,6 +1,7 @@
 module Ducky
   attr_accessor :size
   attr_reader :w, :h
+
   class Shape < Node2D
     def initialize(position:, size:, name: "Shape##{hash}")
       super(position: position, name: name)
@@ -16,7 +17,7 @@ module Ducky
     end
 
     def collides_with?(shape)
-      raise NotImplementedError, "Shape#collides_with? must be override"
+      raise NotImplementedError, 'Shape#collides_with? must be override'
     end
 
     def draw(args); end

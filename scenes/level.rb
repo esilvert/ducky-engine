@@ -8,7 +8,6 @@ class Level < Ducky::Scene
 
     # Scene navigation
     @next_scene = nil # This is mandatory, replace with your next_scene class (Level)
-
   end
 
   def complete?
