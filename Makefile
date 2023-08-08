@@ -1,13 +1,16 @@
+install_dir = install_files
+target_dir = ../mygame/app
+
 install: directories
-	cp install_files/main.rb ../mygame/app/
-	cp install_files/repl.rb ../mygame/app/
-	cp install_files/lib.rb ../mygame/app/
-	cp install_files/models.rb ../mygame/app/
-	cp install_files/scenes.rb ../mygame/app/
-	cp install_files/main_menu.rb ../mygame/app/scenes/
-	cp install_files/game.rb ../mygame/app/
-	cp install_files/Makefile ../
+	cp $(install_dir)/main.rb $(target_dir)
+	cp $(install_dir)/repl.rb $(target_dir)
+	cp $(install_dir)/lib.rb $(target_dir)
+	cp $(install_dir)/models.rb $(target_dir)
+	cp $(install_dir)/scenes.rb $(target_dir)
+	cp $(install_dir)/main_menu.rb $(target_dir)/scenes/
+	cp $(install_dir)/game.rb $(target_dir)
+	cp $(install_dir)/Makefile ../
 
 directories:
-	[ -d ../mygame/app/models ] || mkdir ../mygame/app/models
-	[ -d ../mygame/app/scenes ] || mkdir ../mygame/app/scenes
+	[ -d $(target_dir)/models ] || mkdir $(target_dir)/models
+	[ -d $(target_dir)/scenes ] || mkdir $(target_dir)/scenes
