@@ -93,6 +93,20 @@ module Ducky
       end
     end
 
+    def print_tree
+      puts "\n" * 2
+      puts "Printing tree for #{self.class.name}"
+      puts "Nodes: #{nodes.count}"
+
+      puts "Root (#{self.class.name})"
+
+      nodes.each do |node|
+        node.print_tree(indent: 2)
+      end
+
+      puts "End of tree for #{self.class.name}" + ("\n" * 2)
+    end
+
     protected
 
     # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity

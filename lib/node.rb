@@ -101,6 +101,16 @@ module Ducky
       time_scale * DELTA_TIME
     end
 
+    def print_tree(indent: 0)
+      puts "#{'-' * indent}[#{self.class.name}] #{name} #{disabled? ? '(disabled)' : ''} [children: #{active_children.count}]"
+
+      active_children.each do |child|
+        child.print_tree(indent: indent + 2)
+      end
+
+      nil
+    end
+
     private
 
     def active_children

@@ -34,13 +34,13 @@ class Object
     @@indent ||= 0
 
     if block_given?
-      puts "#{"\t" * @@indent} [#{self.class.name}]  #{msg}"
+      puts format('%-50s', "[#{self.class.name}]") + "#{"\t" * @@indent}|   #{msg}"
       @@indent += 1
       yield
       @@indent -= 1
-      puts "#{"\t" * @@indent} [#{self.class.name}] -- ENDED (#{msg})"
+      puts format('%-50s', "[#{self.class.name}]") + "#{"\t" * @@indent}|   -- ENDED (#{msg})"
     else
-      puts "#{"\t" * @@indent} [#{self.class.name}] #{msg}"
+      puts format('%-50s', "[#{self.class.name}]") + "#{"\t" * @@indent}|   #{msg}"
     end
   end
 end
