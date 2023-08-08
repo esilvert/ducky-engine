@@ -14,11 +14,11 @@ module Ducky
       position:,
       width:,
       height:,
-      text:,
+      text: nil,
       name: "Button##{hash}",
       asset: 'square/blue.png',
       angle: 0,
-      modulate: Color.one,
+      modulate: Color.white,
       source_x: 0,
       source_y: 0,
       source_w: -1,
@@ -27,7 +27,7 @@ module Ducky
       flip_horizontally: false,
       angle_anchor_x: 0.5,
       angle_anchor_y: 1,
-      blend_mode: Blending::MODULE,
+      blend_mode: Blending::ALPHA,
       center: true
     )
       super(
@@ -51,15 +51,17 @@ module Ducky
 
       @size = Vector2.new(width, height)
 
-      self.position = position
       @local_position -= size * 0.5 if center
 
       @base_modulate = modulate
       @hovered_modulate = DEFAULT_HOVERED_MODULATE
       @pressed_modulate = DEFAULT_PRESSED_MODULATE
 
-      @label = add_child(Label.new(text: text))
-      @label.fit_text_into(width, height)
+      if text
+        @label = add_child(Label.new(text: text))
+        @label.fit_text_into(width, height)
+      end
+
       @state = :default
     end
     # rubocop:enable Metrics/ParameterLists, Metrics/MethodLength
@@ -84,27 +86,23 @@ module Ducky
       self
     end
 
-    def draw(args)
-      args.outputs.sprites << to_dr
-    end
-
     # rubocop:disable Metrics/AbcSize, Metrics/PerceivedComplexity, Metrics/CyclomaticComplexity
     def ducky_update(_args)
       if clicked? # only occur once
         @modulate = @pressed_modulate
-        @clicked_callback&.call
+        @clicked_callback&.call(self)
         @state = :clicked
       elsif pressed?
         @modulate = @pressed_modulate
-        @pressed_callback&.call if @state != :pressed
+        @pressed_callback&.call(self) if @state != :pressed
         @state = :pressed
       elsif hovered?
         @modulate = @hovered_modulate
-        @hovered_callback&.call if @state != :hovered
+        @hovered_callback&.call(self) if @state != :hovered
         @state = :hovered
       else
         @modulate = @base_modulate
-        @focus_lost_callback&.call if @state != :default
+        @focus_lost_callback&.call(self) if @state != :default
         @state = :default
       end
     end
