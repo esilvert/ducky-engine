@@ -39,6 +39,7 @@ module Ducky
     def add_child(node)
       super
       update_children_position
+      node
     end
 
     private
